@@ -48,9 +48,9 @@ export const App: React.FC = () => {
       </nav>
 
       {/* MAIN GRID */}
-      <main className="max-w-lg lg:max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20 animate-in duration-1000 fade-in-0 slide-in-from-bottom-4">
+      <main className="max-w-xl lg:max-w-6xl mx-auto px-6 py-9 grid grid-cols-1 lg:grid-cols-5 gap-12 items-center mt-20 animate-in duration-1000 fade-in-0 slide-in-from-bottom-4">
         {/* LEFT COLUMN */}
-        <section className="flex flex-col gap-y-6">
+        <section className="flex flex-col gap-y-6 lg:col-span-3">
           {/* Pill */}
           <div className="inline-flex items-center gap-2 border border-border rounded-full px-3.5 py-1.5 w-fit bg-background-2/30">
             <span className="size-1.5 rounded-full bg-accent shrink-0 inline-block" />
@@ -98,7 +98,7 @@ export const App: React.FC = () => {
         </section>
 
         {/* RIGHT COLUMN */}
-        <section className="flex flex-col gap-y-6">
+        <section className="flex flex-col gap-y-6 lg:col-span-2">
           <img
             alt="Calculator 3D icon"
             draggable="false"
