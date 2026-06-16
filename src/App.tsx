@@ -41,14 +41,14 @@ export const App: React.FC = () => {
       </dialog>
 
       {/* NAV */}
-      <nav className="border-b border-border/50 p-6 flex justify-center items-center">
+      <nav className="border-b border-border/50 px-6 flex justify-center items-center fixed top-0 w-full h-20 bg-background/50 backdrop-blur">
         <header className="font-header text-2xl tracking-wide uppercase">
           Xatruch <span className="text-accent">Fitness</span>
         </header>
       </nav>
 
       {/* MAIN GRID */}
-      <main className="max-w-lg lg:max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <main className="max-w-lg lg:max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20">
         {/* LEFT COLUMN */}
         <section className="flex flex-col gap-y-6">
           {/* Pill */}
