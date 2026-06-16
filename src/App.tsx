@@ -3,8 +3,45 @@ import * as React from "react";
 export const App: React.FC = () => {
   return (
     <>
+      {/* DIALOG */}
+      <dialog
+        id="dialog"
+        popover="auto"
+        className="bg-background border border-border/50 rounded-xl w-full max-w-lg fixed top-full lg:top-1/2 left-1/2 -translate-x-1/2 -translate-y-full lg:-translate-y-1/2 backdrop:bg-background/90"
+      >
+        <div className="space-y-4 p-6">
+          <header className="leading-relaxed">
+            <h2 className="font-header tracking-tight text-3xl lg:text-4xl uppercase text-foreground">
+              Calculadora de Macros <span className="text-accent">Pro</span>
+            </h2>
+            <p className="text-muted">
+              Ya puedes acceder a tu calculadora personalizada para ver
+              exactamente cuántas calorías y proteína necesitas según tu
+              objetivo.
+            </p>
+          </header>
+          <a
+            href="https://tally.so/r/EkNGZr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:text-accent-hover underline underline-offset-4 text-sm transition-colors"
+          >
+            https://tally.so/r/EkNGZr
+          </a>
+        </div>
+        <div className="border-t border-border/30 flex justify-end p-6 pt-4">
+          <button
+            popoverTarget="dialog"
+            popoverTargetAction="hide"
+            className="bg-accent rounded-md py-2 px-4 text-sm font-semibold text-background text-center cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            Cerrar
+          </button>
+        </div>
+      </dialog>
+
       {/* NAV */}
-      <nav className="border-b border-border/50 py-6 px-6 flex justify-center items-center">
+      <nav className="border-b border-border/50 p-6 flex justify-center items-center">
         <header className="font-header text-2xl tracking-wide uppercase">
           Xatruch <span className="text-accent">Fitness</span>
         </header>
@@ -81,7 +118,7 @@ export const App: React.FC = () => {
             {/* Email Card */}
             <div className="bg-background-2/30 border border-border/30 rounded-xl p-6 pt-9 mt-3 space-y-4">
               <header className="leading-relaxed">
-                <h2 className="font-header text-3xl lg:text-4xl uppercase">
+                <h2 className="font-header tracking-tight text-3xl lg:text-4xl uppercase">
                   Todo lo que quiero es tu email
                 </h2>
                 <p className="text-muted">
@@ -101,6 +138,7 @@ export const App: React.FC = () => {
                     objetivo: data.get("objetivo"),
                   });
                   e.currentTarget.reset();
+                  document.getElementById("dialog")?.showPopover();
                 }}
                 onReset={() => {
                   document
