@@ -13,9 +13,3 @@
   --color-accent-hover: #c9a55a;
   --color-border: #4a6fa5;
 }
-
-@layer {
-  body {
-    @apply selection:bg-accent/50 selection:text-foreground;
-  }
-}

@@ -11,9 +11,9 @@ export const App: React.FC = () => {
       </nav>
 
       {/* MAIN GRID */}
-      <section className="max-w-lg lg:max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <main className="max-w-lg lg:max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         {/* LEFT COLUMN */}
-        <div className="flex flex-col gap-y-6">
+        <section className="flex flex-col gap-y-6">
           {/* Pill */}
           <div className="inline-flex items-center gap-2 border border-border rounded-full px-3.5 py-1.5 w-fit bg-background-2/30">
             <span className="size-1.5 rounded-full bg-accent shrink-0 inline-block" />
@@ -58,10 +58,10 @@ export const App: React.FC = () => {
               </span>
             </p>
           </div>
-        </div>
+        </section>
 
         {/* RIGHT COLUMN */}
-        <div className="flex flex-col gap-y-6">
+        <section className="flex flex-col gap-y-6">
           <img
             alt="Calculator 3D icon"
             draggable="false"
@@ -180,8 +180,8 @@ export const App: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </>
   );
 };
