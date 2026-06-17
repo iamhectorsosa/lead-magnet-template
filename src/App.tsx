@@ -1,5 +1,7 @@
 import * as React from "react";
 
+const MACRO_CALCULATOR_URL = "https://tally.so/r/EkNGZr";
+
 export const App: React.FC = () => {
   return (
     <>
@@ -15,18 +17,17 @@ export const App: React.FC = () => {
               Calculadora de Macros <span className="text-accent">Pro</span>
             </h2>
             <p className="text-muted">
-              Ya puedes acceder a tu calculadora personalizada para ver
-              exactamente cuántas calorías y proteína necesitas según tu
-              objetivo.
+              Has sido redirigido automáticamente. Descubre exactamente cuántas
+              calorías y proteína necesitas según tu objetivo.
             </p>
           </header>
           <a
-            href="https://tally.so/r/EkNGZr"
+            href={MACRO_CALCULATOR_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent hover:text-accent-hover underline underline-offset-4 text-sm transition-colors"
           >
-            https://tally.so/r/EkNGZr
+            {MACRO_CALCULATOR_URL}
           </a>
         </div>
         <div className="border-t border-border/30 flex justify-end p-6 pt-4">
@@ -138,6 +139,7 @@ export const App: React.FC = () => {
                     objetivo: data.get("objetivo"),
                   });
                   e.currentTarget.reset();
+                  window.open(MACRO_CALCULATOR_URL, "_blank");
                   document.getElementById("dialog")?.showPopover();
                 }}
                 onReset={() => {
