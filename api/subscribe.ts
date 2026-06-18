@@ -1,7 +1,23 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import MailerLite from "@mailerlite/mailerlite-nodejs";
 
+const ALLOWED_ORIGINS = [
+  "https://iamhectorsosa.github.io",
+  "http://localhost:5173",
+];
+
 const handler = async (req: VercelRequest, res: VercelResponse) => {
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  }
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
