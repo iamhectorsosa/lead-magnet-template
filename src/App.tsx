@@ -1,6 +1,7 @@
 import * as React from "react";
 
-const MACRO_CALCULATOR_URL = "https://tally.so/r/EkNGZr";
+const API_URL = import.meta.env.VITE_SUBSCRIBE_URL;
+const MACRO_CALCULATOR_URL = import.meta.env.VITE_MACRO_CALCULATOR_URL;
 
 export const App: React.FC = () => {
   return (
@@ -129,23 +130,47 @@ export const App: React.FC = () => {
 
               {/* Inputs */}
               <form
-                className="space-y-4"
-                onSubmit={(e) => {
+                data-loading="false"
+                data-error="false"
+                className="group space-y-4"
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  const data = new FormData(e.currentTarget);
-                  console.log({
-                    name: data.get("name"),
-                    email: data.get("email"),
-                    objetivo: data.get("objetivo"),
-                  });
-                  e.currentTarget.reset();
-                  window.open(MACRO_CALCULATOR_URL, "_blank");
-                  document.getElementById("dialog")?.showPopover();
+                  const form = e.currentTarget;
+                  if (form.dataset.loading === "true") return;
+
+                  form.dataset.loading = "true";
+                  form.dataset.error = "false";
+
+                  try {
+                    const data = new FormData(form);
+                    const res = await fetch(API_URL, {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        name: data.get("name"),
+                        email: data.get("email"),
+                      }),
+                    });
+
+                    if (!res.ok) throw new Error();
+
+                    form.reset();
+                    document
+                      .querySelector("select")
+                      ?.parentElement?.setAttribute("data-has-value", "false");
+                    window.open(MACRO_CALCULATOR_URL, "_blank");
+                    document.getElementById("dialog")?.showPopover();
+                  } catch {
+                    form.dataset.error = "true";
+                  } finally {
+                    form.dataset.loading = "false";
+                  }
                 }}
                 onReset={() => {
                   document
                     .querySelector("select")
                     ?.parentElement?.setAttribute("data-has-value", "false");
+                  window.open(MACRO_CALCULATOR_URL, "_blank");
                 }}
               >
                 <input
@@ -194,10 +219,10 @@ export const App: React.FC = () => {
                   </svg>
                 </div>
 
-                {/* CTA */}
+                {/* Idle button */}
                 <button
                   type="submit"
-                  className="bg-accent rounded-md py-3 text-sm font-semibold text-background text-center cursor-pointer w-full hover:opacity-90 transition-opacity"
+                  className="group-data-[loading=true]:hidden bg-accent rounded-md py-3 text-sm font-semibold text-background text-center w-full hover:opacity-90 transition-opacity cursor-pointer inline-flex items-center justify-center gap-1.5"
                 >
                   Quiero mis macros ahora
                   <svg
@@ -205,12 +230,40 @@ export const App: React.FC = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    className="size-4 stroke-2 pointer-events-none inline ml-1"
+                    className="size-4 stroke-2"
                   >
                     <path d="M5 12h14" />
                     <path d="m12 5 7 7-7 7" />
                   </svg>
                 </button>
+
+                {/* Loading button */}
+                <button
+                  disabled
+                  type="button"
+                  className="hidden group-data-[loading=true]:inline-flex bg-accent/60 rounded-md py-3 text-sm font-semibold text-background/80 text-center w-full items-center justify-center gap-2 cursor-not-allowed"
+                >
+                  <svg
+                    className="animate-spin size-4 stroke-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                  Enviando...
+                </button>
+
+                {/* Error message */}
+                <p
+                  className="hidden group-data-[error=true]:block text-pink-600 text-sm text-center"
+                  role="alert"
+                >
+                  Algo salió mal. Intenta de nuevo.
+                </p>
               </form>
 
               {/* No spam */}
