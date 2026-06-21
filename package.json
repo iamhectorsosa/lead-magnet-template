@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev:ui": "vite --host",
     "dev:api": "vercel dev --listen 3000 --yes",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build:ui": "tsc -b && vite build",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@mailerlite/mailerlite-nodejs": "^1.6.0",
