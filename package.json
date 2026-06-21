@@ -7,8 +7,6 @@
     "dev:ui": "vite --host",
     "dev:api": "vercel dev --listen 3000 --yes",
     "build:ui": "tsc -b && vite build",
-    "build:html": "tsc -b && vite build",
-    "build:commit": "pnpm build:html && git add dist/index.html && git commit -m 'build: compile HTML'",
     "lint": "eslint ."
   },
   "dependencies": {
