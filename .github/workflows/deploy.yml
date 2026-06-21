@@ -41,7 +41,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm build
+        run: pnpm build:ui
         env:
           VITE_SUBSCRIBE_URL: ${{ vars.VITE_SUBSCRIBE_URL }}
           VITE_MACRO_CALCULATOR_URL: ${{ vars.VITE_MACRO_CALCULATOR_URL }}
