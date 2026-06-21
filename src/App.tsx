@@ -149,6 +149,8 @@ export const App: React.FC = () => {
                       body: JSON.stringify({
                         name: data.get("name"),
                         email: data.get("email"),
+                        campaign_selection: data.get("objetivo"),
+                        campaign: "macro-calculator",
                       }),
                     });
 

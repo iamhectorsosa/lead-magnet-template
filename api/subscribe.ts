@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import MailerLite from "@mailerlite/mailerlite-nodejs";
 
 const ALLOWED_ORIGINS = [
+  "https://xatruchfitness.com",
   "https://iamhectorsosa.github.io",
   "http://localhost:5173",
 ];
@@ -22,7 +23,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email, name } = req.body as { email: string; name: string };
+  const { email, name, ...fields } = req.body as Record<string, string>;
 
   if (!process.env.MAILERLITE_API_KEY) {
     return res.status(500).json({ error: "configuration error" });
@@ -39,7 +40,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
   try {
     await mailerlite.subscribers.createOrUpdate({
       email,
-      fields: { name },
+      fields: { name, ...fields },
       status: "active",
     });
     return res.status(200).json({ success: true });
