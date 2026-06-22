@@ -2,6 +2,8 @@ import * as React from "react";
 
 const API_URL = import.meta.env.VITE_SUBSCRIBE_URL;
 const MACRO_CALCULATOR_URL = import.meta.env.VITE_MACRO_CALCULATOR_URL;
+const MACRO_CALCULATOR_GROUP_ID = import.meta.env
+  .VITE_MACRO_CALCULATOR_GROUP_ID;
 
 export const App: React.FC = () => {
   return (
@@ -149,8 +151,8 @@ export const App: React.FC = () => {
                       body: JSON.stringify({
                         name: data.get("name"),
                         email: data.get("email"),
-                        campaign_selection: data.get("objetivo"),
-                        campaign: "macro-calculator",
+                        objetivo: data.get("objetivo"),
+                        groupId: MACRO_CALCULATOR_GROUP_ID,
                       }),
                     });
 
@@ -205,8 +207,8 @@ export const App: React.FC = () => {
                     <option value="" disabled hidden>
                       Tu objetivo
                     </option>
-                    <option value="perder-grasa">Perder Grasa</option>
-                    <option value="ganar-masa-muscular">
+                    <option value="Perder Grasa">Perder Grasa</option>
+                    <option value="Ganar Masa Muscular">
                       Ganar Masa Muscular
                     </option>
                   </select>

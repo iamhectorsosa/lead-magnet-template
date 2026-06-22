@@ -23,7 +23,10 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email, name, ...fields } = req.body as Record<string, string>;
+  const { email, name, groupId, ...fields } = req.body as Record<
+    string,
+    string
+  >;
 
   if (!process.env.MAILERLITE_API_KEY) {
     return res.status(500).json({ error: "configuration error" });
@@ -41,6 +44,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     await mailerlite.subscribers.createOrUpdate({
       email,
       fields: { name, ...fields },
+      groups: groupId ? [groupId] : undefined,
       status: "active",
     });
     return res.status(200).json({ success: true });
